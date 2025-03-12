@@ -1,5 +1,6 @@
 #include <iostream>
-#include "SetStruct/SetStruct.h"
+#include "SetStruct.h"
+#include "SetClass.h"
 using namespace std;
 const int min_size = 7, max_size = 9;
 const int min_elem = 10, max_elem = 98;
@@ -16,29 +17,11 @@ int main() {
 	SetStruct* B = createnewSet('B', sizeB, min_elem, max_elem);
 	cout << "Множество B: " << printSet(B, ',') << '\n';
 	cout << "Мощность множества B: " << LengthSet(B) << '\n';
-	string isSubSetAtoB = (isSubset(A, B)) ? "Да" : "Нет";
-	string isSubSetBtoA = (isSubset(A, A)) ? "Да" : "Нет";
-	cout << "Множество А является подмножеством B? " << isSubSetAtoB << '\n';
-	cout << "Множество A является подмножеством A? " << isSubSetBtoA << '\n';
-	string isEqualSetAtoB = (isEqual(A, B)) ? "Да" : "Нет";
-	string isEqualSetAtoA = (isEqual(A, A)) ? "Да" : "Нет";
-	cout << "Множество А равно Множеству B? " << isEqualSetAtoB << '\n';
-	cout << "Множество А равно Множеству А? " << isEqualSetAtoA << '\n';
-	SetStruct* C = merge(A, B);
-	cout << "Объединение множеств A и B: " << printSet(C, ',') << '\n';
-	cout << "Мощность множества C: " << LengthSet(C) << '\n';
-	SetStruct* C1 = Intersection(A, B);
-	cout << "Пересечение множеств A и B: " << printSet(C1, ',') << '\n';
-	cout << "Мощность множества C: " << LengthSet(C1) << '\n';
-	SetStruct* C2 = Difference(A, B);
-	cout << "Разность множеств А и B: " << printSet(C2, ',') << '\n';
-	cout << "Мощность множества C: " << LengthSet(C2) << '\n';
-	SetStruct* C3 = Difference(B, A);
-	cout << "Разность множеств B и A: " << printSet(C3, ',') << '\n';
-	cout << "Мощность множества C: " << LengthSet(C3) << '\n';
-	SetStruct* C4 = SimmetricDif(A, B);
-	cout << "Симметричная разность A и B: " << printSet(C4, ',') << '\n';
-	cout << "Мощность множества C: " << LengthSet(C4);
+	SetClass* SA = new SetClass();
+	SA->createnewSet('A', sizeA, min_elem, max_elem);
+	cout << "Множество A: ";
+	cout << SA->printSet(',') << '\n';
+	cout << "Мощность А: " << SA->LengthSet() << '\n';
 	return 0;
 
 }

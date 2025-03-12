@@ -38,9 +38,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SetStruct\SetStruct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -56,10 +53,13 @@
     <ClCompile Include="Setbitset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Setunorderedset.cpp">
+    <ClCompile Include="BinarySearchTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BinarySearchTree.cpp">
+    <ClCompile Include="SetStruct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Setunorderedset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
