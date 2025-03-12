@@ -34,7 +34,7 @@
     <ClCompile Include="SetClass.cpp" />
     <ClCompile Include="SetList.cpp" />
     <ClCompile Include="Setset.cpp" />
-    <ClCompile Include="SetStruct\SetStruct.cpp" />
+    <ClCompile Include="SetStruct.cpp" />
     <ClCompile Include="Setunorderedset.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
