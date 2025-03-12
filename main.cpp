@@ -1,6 +1,7 @@
 #include <iostream>
 #include "SetStruct.h"
 #include "SetClass.h"
+#include "SetList.h"
 using namespace std;
 const int min_size = 7, max_size = 9;
 const int min_elem = 10, max_elem = 98;
@@ -14,14 +15,23 @@ int main() {
 	SetStruct* A = createnewSet('A', sizeA, min_elem, max_elem);
 	cout << printSet(A, ',') << '\n';
 	cout << "Мощность множества A: " << LengthSet(A) << '\n';
-	SetStruct* B = createnewSet('B', sizeB, min_elem, max_elem);
-	cout << "Множество B: " << printSet(B, ',') << '\n';
-	cout << "Мощность множества B: " << LengthSet(B) << '\n';
 	SetClass* SA = new SetClass();
 	SA->createnewSet('A', sizeA, min_elem, max_elem);
 	cout << "Множество A: ";
 	cout << SA->printSet(',') << '\n';
 	cout << "Мощность А: " << SA->LengthSet() << '\n';
+	SetList* setlist = new SetList();
+	setlist=setlist->createnewSet('A', sizeA, min_elem, max_elem);
+	cout << "Множество A: " << setlist->printSet(',');
+	cout << "\nМощность A: " << setlist->LengthSet();
+	cout << "\nМножество B: ";
+	SetList* setlist1 = new SetList();
+	setlist1 = setlist1->createnewSet('B', sizeB, min_elem, max_elem);
+	cout << setlist1->printSet(',');
+	cout << "\nСимметричная разность A и B: ";
+	SetList* C = setlist->SimmetricDif(setlist1);
+	cout << C->printSet(',') << '\n';
+	cout << "Мощность C: " << C->LengthSet();
 	return 0;
 
 }
