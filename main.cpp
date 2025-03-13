@@ -5,6 +5,7 @@
 #include "SetList.h"
 #include "Setset.h"
 #include "Setunorderedset.h"
+#include "Setbitset.h"
 using namespace std;
 const int min_size = 7, max_size = 9;
 const int min_elem = 10, max_elem = 98;
@@ -18,15 +19,14 @@ int main() {
 	setlocale(LC_ALL, "ru");
 	cout << "Осин Сергей. 23ВП2. Вариант-21. Множество A - нечётные цифры, Множество B - числа кратные 3.\n";
 	srand(time(NULL));
-	build_table();
-	/*cout << "Множество A: ";
+	cout << "Множество A: ";
 	int sizeA = rand() % (max_size - min_size + 1) + min_size;
 	int sizeB = rand() % (max_size - min_size + 1) + min_size;
-	cout << "Структура SET:\n";
+	cout << "Структура set3:\n";
 	SetStruct* A = createnewSet('A', sizeA, min_elem, max_elem);
 	cout << printSet(A, ',') << '\n';
 	cout << "Мощность множества A: " << LengthSet(A) << '\n';
-	cout << "Класс SET:\n";
+	cout << "Класс set3:\n";
 	SetClass* SA = new SetClass();
 	SA->createnewSet('A', sizeA, min_elem, max_elem);
 	cout << "Множество A: ";
@@ -45,7 +45,7 @@ int main() {
 	SetList* C = setlist->SimmetricDif(setlist1);
 	cout << C->printSet(',') << '\n';
 	cout << "Мощность C: " << C->LengthSet();
-	cout << "\nКонтейнер set:\n";
+	cout << "\nКонтейнер set3:\n";
 	Setset* set1 = new Setset();
 	set1=set1->createnewSet('A', sizeA, min_elem, max_elem);
 	cout << "Множество A: " << set1->printSet(',') << '\n';
@@ -54,7 +54,19 @@ int main() {
 	Setunorderedset* setB = new Setunorderedset();
 	setB = setB->createnewSet('A', sizeA, min_elem, max_elem);
 	cout << "Множество B: " << setB->printSet(',') << '\n';
-	cout << "Мощность B: " << setB->LengthSet();*/
+	cout << "Мощность B: " << setB->LengthSet() << '\n';
+	cout << "Контейнер bitset:\n";
+	Setbitset* set3 = new Setbitset();
+	set3 = set3->createnewSet('A', 10, 10, 99);
+	cout << "A: " << set3->printSet(',') + '\n';
+	cout << "length A: "<< set3->LengthSet() + '\n';
+	Setbitset* setb = new Setbitset();
+	setb = setb->createnewSet('B', 10, 11, 99);
+	cout << "B: " + setb->printSet(',') + '\n';
+	Setbitset* C1 = new Setbitset();
+	C1= set3->Intersection(setb);
+	cout << "C1: " + C1->printSet(',') + '\n';
+	cout << "Length C1: " << C1->LengthSet() + '\n';
 	return 0;
 
 }
