@@ -1,16 +1,25 @@
 #include <iostream>
+#include <iomanip>
 #include "SetStruct.h"
 #include "SetClass.h"
 #include "SetList.h"
 #include "Setset.h"
+#include "Setunorderedset.h"
 using namespace std;
 const int min_size = 7, max_size = 9;
 const int min_elem = 10, max_elem = 98;
+const char underline = '_';
+const char verticline = '|';
+void build_table() {
+	cout << setw(100) << setfill(underline) << '\n';
+	cout << setw(10) << setfill(verticline) << "Односвязный список" << setfill(verticline);
+}
 int main() {
 	setlocale(LC_ALL, "ru");
 	cout << "Осин Сергей. 23ВП2. Вариант-21. Множество A - нечётные цифры, Множество B - числа кратные 3.\n";
 	srand(time(NULL));
-	cout << "Множество A: ";
+	build_table();
+	/*cout << "Множество A: ";
 	int sizeA = rand() % (max_size - min_size + 1) + min_size;
 	int sizeB = rand() % (max_size - min_size + 1) + min_size;
 	cout << "Структура SET:\n";
@@ -41,6 +50,11 @@ int main() {
 	set1=set1->createnewSet('A', sizeA, min_elem, max_elem);
 	cout << "Множество A: " << set1->printSet(',') << '\n';
 	cout << "Мощность A: " << set1->LengthSet();
+	cout << "\nКонтейнер unorderedset:\n";
+	Setunorderedset* setB = new Setunorderedset();
+	setB = setB->createnewSet('A', sizeA, min_elem, max_elem);
+	cout << "Множество B: " << setB->printSet(',') << '\n';
+	cout << "Мощность B: " << setB->LengthSet();*/
 	return 0;
 
 }
