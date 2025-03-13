@@ -4,7 +4,7 @@
 
 class Setbitset {
 private:
-	std::bitset<100000>bitset0;
+	std::bitset<100000>bitset1;
 public:
 	Setbitset();
 	bool isEmptySet();
