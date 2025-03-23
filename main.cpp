@@ -6,18 +6,60 @@
 #include "Setset.h"
 #include "Setunorderedset.h"
 #include "Setbitset.h"
+#include <Windows.h>
 using namespace std;
 const int min_size = 7, max_size = 9;
 const int min_elem = 10, max_elem = 98;
-const char underline = '_';
-const char verticline = '|';
-void build_table() {
-	cout << setw(100) << setfill(underline) << '\n';
-	cout << setw(10) << setfill(verticline) << "Односвязный список" << setfill(verticline);
+int SIZE_SET;
+void lineWithParam(string text) {
+	string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
+	while (text.size() < 23) text += " ";
+	string emptyCell1(20, ' ');
+	string emptyCell2(14, ' ');
+	string emptyCell3(12, ' ');
+	string emptyCell4(13, ' ');
+	string emptyCell5(12, ' ');
+	string emptyCell6(15, ' ');
+
+	cout << horizontLine + ' ' + text + '|' + emptyCell1 + '|' + emptyCell2 +
+		'|' + emptyCell3 + '|' + emptyCell4 + '|' + emptyCell5 +
+		'|' + emptyCell6 + '|';
+}
+
+void addTitle() {
+	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
+	const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Multimap  | Unordered_set |";
+	cout << title;
+}
+
+void addAllLineWithParam() {
+	addTitle();
+	
+	lineWithParam("Создание множества");
+	lineWithParam("Мощность");
+	lineWithParam("Подмножество А-А");
+	lineWithParam("Подмножество В-А");
+	lineWithParam("Равенство А-А");
+	lineWithParam("Равенство В-А");
+	lineWithParam("Объединение");
+	lineWithParam("Пересечение");
+	lineWithParam("Разность А-В");
+	lineWithParam("Разность В-А");
+	lineWithParam("Симметричная разность");
+
+	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
+	cout << horizontLine;
+}
+
+void createTable() {
+	cout << "Введите размер множества: \n";
+	addAllLineWithParam();
 }
 int main() {
 	setlocale(LC_ALL, "ru");
-	cout << "Осин Сергей. 23ВП2. Вариант-21. Множество A - нечётные цифры, Множество B - числа кратные 3.\n";
+	SetConsoleTitle(L"Осин Сергей 23ВП2");
+	createTable();
+	/*cout << "Осин Сергей. 23ВП2. Вариант-21. Множество A - нечётные цифры, Множество B - числа кратные 3.\n";
 	srand(time(NULL));
 	cout << "Множество A: ";
 	int sizeA = rand() % (max_size - min_size + 1) + min_size;
@@ -66,7 +108,8 @@ int main() {
 	Setbitset* C1 = new Setbitset();
 	C1= set3->Intersection(setb);
 	cout << "C1: " + C1->printSet(',') + '\n';
-	cout << "Length C1: " << C1->LengthSet() + '\n';
+	cout << "Length C1: " << C1->LengthSet() + '\n';*/
+	system("pause");
 	return 0;
 
 }
