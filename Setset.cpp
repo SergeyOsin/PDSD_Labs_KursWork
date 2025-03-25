@@ -2,8 +2,7 @@
 using namespace std;
 
 //F1. Создание  пустого множества
-Setset::Setset() {
-}
+Setset::Setset() {}
 
 //F2. Пустое множество?
 bool Setset::isEmptySet() {
@@ -18,11 +17,12 @@ bool Setset::isElementinSet(int element) {
 }
 
 //F4. Добавление нового элемента в множество
-Setset* Setset::addnewElement(int new_element) {
-	if (isElementinSet(new_element))
-		return this;
-	set0.insert(new_element);
-	return this;
+bool Setset::addnewElement(int new_element) {
+	if (!isElementinSet(new_element)) {
+		set0.insert(new_element);
+		return true;
+	}
+	return false;
 }
 
 //F5. Создание множества
@@ -39,8 +39,8 @@ Setset* Setset::createnewSet(char A, int size, int min_element, int max_element)
 		}
 		else if (random_element % 3 != 0)
 			random_element += 3 - random_element % 3;
-		SetSet = SetSet->addnewElement(random_element);
-		count_elem++;
+		if (SetSet->addnewElement(random_element))
+			count_elem++;
 	}
 	return SetSet;
 }
@@ -55,16 +55,15 @@ string Setset::printSet(char delimiter) {
 	if (isEmptySet())
 		return "";
 	string result = "";
-	for (auto iter : set0)
-		result += std::to_string(iter) + delimiter;
+	for (auto iter= set0.begin();iter!=set0.end();iter++)
+		result += std::to_string(*iter) + delimiter;
 	result.pop_back();
 	return result;
 }
 
 //F8. Удаление множества (очистка памяти, занимаемой списокм).
-Setset* Setset::clearSet() {
+void Setset::clearSet() {
 	set0.clear();
-	return this;
 }
 
 //F9. Множество А является подможноством Множества B?
@@ -90,12 +89,10 @@ Setset* Setset::merge(Setset* SecondB) {
 	if (SecondB->isEmptySet())
 		return this;
 	Setset* C = new Setset();
-	for (auto iter = set0.begin(); iter != set0.end(); iter++) {
+	for (auto iter = set0.begin(); iter != set0.end(); iter++)
 		C->addnewElement(*iter);
-	}
-	for (auto iter = SecondB->set0.begin(); iter != SecondB->set0.end(); iter++) {
+	for (auto iter = SecondB->set0.begin(); iter != SecondB->set0.end(); iter++) 
 		C->addnewElement(*iter);
-	}
 	return C;
 }
 
@@ -104,10 +101,9 @@ Setset* Setset::Intersection(Setset* SecondB) {
 	Setset* C = new Setset();
 	if (isEmptySet() || SecondB->isEmptySet())
 		return C;
-	for (auto iteration = set0.begin(); iteration != set0.end(); iteration++) {
+	for (auto iteration = set0.begin(); iteration != set0.end(); iteration++) 
 		if (SecondB->isElementinSet(*iteration))
 			C->addnewElement(*iteration);
-	}
 	return C;
 }
 
@@ -116,10 +112,9 @@ Setset* Setset::Difference(Setset* SecondB) {
 	Setset* C = new Setset();
 	if (isEmptySet())
 		return C;
-	for (auto iteration = set0.begin(); iteration != set0.end(); iteration++) {
+	for (auto iteration = set0.begin(); iteration != set0.end(); iteration++)
 		if (!SecondB->isElementinSet(*iteration))
 			C->addnewElement(*iteration);
-	}
 	return C;
 }
 //

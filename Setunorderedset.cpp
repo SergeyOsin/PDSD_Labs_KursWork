@@ -11,13 +11,18 @@ bool Setunorderedset::isEmptySet() {
 
 //F3. Проверка принадлежности элемента множеству
 bool Setunorderedset::isElementinSet(int element) {
+	if (isEmptySet())
+		return false;
 	return set1.count(element) > 0;
 }
 
 //F4. Добавление нового элемента в множество
-void Setunorderedset::addnewElement(int new_element) {
-	if (!isElementinSet(new_element))
+bool Setunorderedset::addnewElement(int new_element) {
+	if (!isElementinSet(new_element)) {
 		set1.insert(new_element);
+		return true;
+	}
+	return false;
 }
 
 //F5. Создание множества
@@ -34,8 +39,8 @@ Setunorderedset* Setunorderedset::createnewSet(char A, int size, int min_element
 		}
 		else if (rand_elem % 3 != 0)
 			rand_elem += 3 - rand_elem % 3;
-		newset->addnewElement(rand_elem);
-		count_elem++;
+		if (newset->addnewElement(rand_elem))
+			count_elem++;
 	}
 	return newset;
 }

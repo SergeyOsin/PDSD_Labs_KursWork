@@ -9,11 +9,11 @@ public:
 	Setset();
 	bool isEmptySet();
 	bool isElementinSet(int element);
-	Setset* addnewElement(int new_element);
+	bool addnewElement(int new_element);
 	Setset* createnewSet(char A, int size, int min_element, int max_element);
 	int LengthSet();
 	std::string printSet(char delimiter);
-	Setset* clearSet();
+	void clearSet();
 	bool isSubset(Setset* SecondB);
 	bool isEqual(Setset* SecondB);
 	Setset* merge(Setset* SecondB);

@@ -9,7 +9,7 @@ public:
 	Setbitset();
 	bool isEmptySet();
 	bool isElementinSet(int element);
-	void addnewElement(int new_element);
+	bool addnewElement(int new_element);
 	Setbitset* createnewSet(char A, int size, int min_element, int max_element);
 	int LengthSet();
 	std::string printSet(char delimiter);
