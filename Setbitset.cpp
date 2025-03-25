@@ -20,9 +20,12 @@ bool Setbitset::isElementinSet(int element) {
 }
 
 //F4. Добавление нового элемента во множество
-void Setbitset::addnewElement(int new_element) {
-	if (!isElementinSet(new_element))
-			bitset1.set(new_element, true); 
+bool Setbitset::addnewElement(int new_element) {
+	if (!isElementinSet(new_element)) {
+		bitset1.set(new_element, true);
+		return true;
+	}
+	return false;
 }
 
 //F5. Создание нового множества
@@ -39,15 +42,15 @@ Setbitset* Setbitset::createnewSet(char A, int size, int min_element, int max_el
 		}
 		else if (rand_elem % 3 != 0)
 			rand_elem += 3 - rand_elem % 3;
-		newset->addnewElement(rand_elem);
-		count_elem++;
+		if (newset->addnewElement(rand_elem))
+			count_elem++;
 	}
 	return newset;
 }
 
-//F6. Длина множества
+
 int Setbitset::LengthSet() {
-	return bitset1.count() - 10;
+	return bitset1.count();
 }
 
 //F7. Вывод множества

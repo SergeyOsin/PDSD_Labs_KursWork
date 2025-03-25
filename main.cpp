@@ -18,7 +18,7 @@ void lineWithParam(string text) {
 	string emptyCell2(14, ' ');
 	string emptyCell3(12, ' ');
 	string emptyCell4(13, ' ');
-	string emptyCell5(12, ' ');
+	string emptyCell5(10, ' ');
 	string emptyCell6(15, ' ');
 
 	cout << horizontLine + ' ' + text + '|' + emptyCell1 + '|' + emptyCell2 +
@@ -28,13 +28,12 @@ void lineWithParam(string text) {
 
 void addTitle() {
 	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
-	const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Multimap  | Unordered_set |";
+	const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Bitset  | Unordered_set |";
 	cout << title;
 }
 
 void addAllLineWithParam() {
 	addTitle();
-	
 	lineWithParam("Создание множества");
 	lineWithParam("Мощность");
 	lineWithParam("Подмножество А-А");
@@ -46,7 +45,6 @@ void addAllLineWithParam() {
 	lineWithParam("Разность А-В");
 	lineWithParam("Разность В-А");
 	lineWithParam("Симметричная разность");
-
 	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
 	cout << horizontLine;
 }

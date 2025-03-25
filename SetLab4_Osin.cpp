@@ -1,9 +1,8 @@
-#include "SetList.h"
+#include "SetLab4_Osin.h"
 using namespace std;
 
 //F1. Создание  пустого множества
-SetList::SetList() {
-}
+SetList::SetList() {}
 
 //F2. Пустое множество?
 bool SetList::isEmptySet() {
@@ -23,7 +22,7 @@ bool SetList::isElementinSet(int element) {
 //F4. Добавление нового элемента в множество
 bool SetList::addnewElement(int new_element) {
 	if (!isElementinSet(new_element)) {
-		this->list0.push_front(new_element);
+		list0.push_front(new_element);
 		return true;
 	}
 	return false;
@@ -43,15 +42,15 @@ SetList* SetList::createnewSet(char A, int size, int min_element, int max_elemen
 		}
 		else if (random_element % 3 != 0)
 			random_element += 3 - random_element % 3;
-		setlist->addnewElement(random_element);
-		count_elem++;
+		if (setlist->addnewElement(random_element))
+			count_elem++;
 	}
 	return setlist;
 }
 
 ////F6. Мощность множества
 int SetList::LengthSet() {
-	return list0.size();
+	return this->list0.size();
 }
 
 //F7. Вывод элементов множества
