@@ -2,54 +2,330 @@
 #include <iomanip>
 #include "SetStruct.h"
 #include "SetClass.h"
-#include "Setset.h"
+#include "SetList.h"
 #include "Setset.h"
 #include "Setunorderedset.h"
 #include "Setbitset.h"
 #include <Windows.h>
-#include <time.h>
-#define nl '\n'
+#define nl '\n';
 using namespace std;
-const int min_size = 7, max_size = 9;
-const int min_elem = 10, max_elem = 98;
+int Size_SetA;
+int Size_SetB;
+const int MIN_ELEM = 0;
+const int MAX_ELEM_A = 10 * Size_SetA;
+const int MAX_ELEM_B = 10 * Size_SetB;
+const int MIN_LEN = 1000;
+SetStruct* SetStrA;
+SetStruct* SetStrB;
+SetClass* SetClA;
+SetClass* SetClB;
+SetList* SetListA;
+SetList* SetListB;
+Setset* SetsetA;
+Setset* SetsetB;
 const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
-int setSize;
+const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |";
+double Time[4];
+clock_t start;
+
+void CountTime_Create() {
+	start = clock();
+	SetStrA = createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	clock_t end = clock();
+	SetStrB = createnewSet(Size_SetB, 0, 10 * Size_SetB);
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	start = clock();
+	SetClA = new SetClass();
+	SetClA->createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	end = clock();
+	SetClB = new SetClass();
+	SetClB->createnewSet(Size_SetB, 0, 10 * Size_SetB);
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetListA = new SetList();
+	SetListA->createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	end = clock();
+	SetListB = new SetList();
+	SetListB->createnewSet(Size_SetB, 0, 10 * Size_SetB);
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	SetsetA = new Setset();
+	start = clock();
+	SetsetA->createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	end = clock();
+	SetsetB = new Setset();
+	SetsetB->createnewSet(Size_SetB, 0, 10 * Size_SetB);
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void LenSet() {
+	start = clock();
+	int len = LengthSet(SetStrA);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	start = clock();
+	len = SetClA->LengthSet();
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	len = SetListA->LengthSet();
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	start = clock();
+	len = SetsetA->LengthSet();
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void isSubSetAA() {
+	SetStruct* C = new SetStruct();
+	start = clock();
+	bool flag = isSubset(SetStrA, SetStrA);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	start = clock();
+	flag = SetClA->isSubset(SetClA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetListA = new SetList();
+	flag = SetListA->isSubset(SetListA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	SetsetA = new Setset();
+	start = clock();
+	flag = SetsetA->isSubset(SetsetA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void isSubSetBA() {
+	start = clock();
+	bool flag = isSubset(SetStrA, SetStrB);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	start = clock();
+	flag = SetClA->isSubset(SetClB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	flag = SetListA->isSubset(SetListB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	start = clock();
+	flag = SetsetA->isSubset(SetsetB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void isEqualAA() {
+	start = clock();
+	bool flag = isEqual(SetStrA, SetStrB);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	start = clock();
+	flag = SetClA->isEqual(SetClA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	flag = SetListA->isEqual(SetListA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	start = clock();
+	flag = SetsetA->isEqual(SetsetA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void isEqualBA() {
+	SetStruct* C = new SetStruct();
+	start = clock();
+	bool flag = isEqual(SetStrB, SetStrA);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	start = clock();
+	flag = SetClB->isEqual(SetClA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	flag = SetListB->isEqual(SetListA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	start = clock();
+	flag = SetsetB->isEqual(SetsetA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
 void lineWithParam(string text) {
-	horizontLine;
 	while (text.size() < 23) text += " ";
-	string emptyCell1(20, ' ');
-	string emptyCell2(14, ' ');
-	string emptyCell3(12, ' ');
-	string emptyCell4(13, ' ');
-	string emptyCell5(10, ' ');
-	string emptyCell6(15, ' ');
-
-	cout << horizontLine + ' ' + text + '|' + emptyCell1 + '|' + emptyCell2 +
-		'|' + emptyCell3 + '|' + emptyCell4 + '|' + emptyCell5 +
-		'|' + emptyCell6 + '|';
-}
-void emptycell(int num,string text) {
-	string empty(num, ' ');
-	cout << empty << text;
-}
-void buildSetStruct() {
-	cout << horizontLine;
-	emptycell(6, "Создание множества|");
-	SetStruct* set0 = new SetStruct();
-	clock_t clock0 = clock();
-	set0 = createnewSet('A', setSize, 0, setSize * 10);
-	clock_t finish = clock();
-	double rez =(double) (finish - clock0) / CLOCKS_PER_SEC;
-	cout << rez;
-}
-void addTitle() {
-	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
-	const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Bitset  | Unordered_set |";
-	cout << title;
+	string emptyCell1(15, ' ');
+	string emptyCell2(9, ' ');
+	string emptyCell3(5, ' ');
+	string emptyCell4(4, ' ');
+	cout << horizontLine + ' ' + text + '|' << emptyCell1 << Time[0] << '|' << emptyCell2 << Time[1] << '|' << emptyCell3 << Time[2] << '|' <<
+		emptyCell4 << Time[3] << '|';
 }
 
+void MergeAB() {
+	SetStruct* C = new SetStruct();
+	start = clock();
+	C = merge(SetStrA, SetStrB);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	SetClass* C1 = new SetClass();
+	start = clock();
+	C1 = SetClA->merge(SetClB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetList* C2 = new SetList();
+	C2 = SetListA->merge(SetListB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	Setset* C3 = new Setset();
+	start = clock();
+	C3 = SetsetA->merge(SetsetB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void InterAB() {
+	SetStruct* C = new SetStruct();
+	start = clock();
+	C = Intersection(SetStrA, SetStrB);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	SetClass* C1 = new SetClass();
+	start = clock();
+	C1 = SetClA->Intersection(SetClB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetList* C2 = new SetList();
+	C2 = SetListA->Intersection(SetListB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	Setset* C3 = new Setset();
+	start = clock();
+	C3 = SetsetA->Intersection(SetsetB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void DiffAB() {
+	SetStruct* C = new SetStruct();
+	start = clock();
+	C = Difference(SetStrA, SetStrB);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	SetClass* C1 = new SetClass();
+	start = clock();
+	C1 = SetClA->Difference(SetClB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetList* C2 = new SetList();
+	C2 = SetListA->Difference(SetListB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	Setset* C3 = new Setset();
+	start = clock();
+	C3 = SetsetA->Difference(SetsetB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void DiffBA() {
+	SetStruct* C = new SetStruct();
+	start = clock();
+	C = Difference(SetStrB, SetStrA);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	SetClass* C1 = new SetClass();
+	start = clock();
+	C1 = SetClB->Difference(SetClA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetList* C2 = new SetList();
+	C2 = SetListB->Difference(SetListA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	Setset* C3 = new Setset();
+	start = clock();
+	C3 = SetsetB->Difference(SetsetA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
+
+void SimmDifAB() {
+	SetStruct* C = new SetStruct();
+	start = clock();
+	C = SimmetricDif(SetStrA, SetStrB);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	SetClass* C1 = new SetClass();
+	start = clock();
+	C1 = SetClA->SimmetricDif(SetClB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetList* C2 = new SetList();
+	C2 = SetListA->SimmetricDif(SetListB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	Setset* C3 = new Setset();
+	start = clock();
+	C3 = SetsetA->SimmetricDif(SetsetB);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
+}
 void addAllLineWithParam() {
-	addTitle();
+	/*addTitle();*/
 	lineWithParam("Создание множества");
 	lineWithParam("Мощность");
 	lineWithParam("Подмножество А-А");
@@ -61,73 +337,67 @@ void addAllLineWithParam() {
 	lineWithParam("Разность А-В");
 	lineWithParam("Разность В-А");
 	lineWithParam("Симметричная разность");
-	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
 	cout << horizontLine;
 }
 
-void createTable() {
-	cout << "Введите размер множества: ";
-	cin>>setSize;
-	cout << '\n';
-	addTitle();
-	buildSetStruct();
+int WriteLenSet() {
+	int size1;
+	do {
+		if (!(cin >> size1)) {
+			cout << "Введите целое число!\n";
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		if (size1 < MIN_LEN)
+			cout << "Введите размер больше 1000:  ";
+	} while (size1 < MIN_LEN);
+	return size1;
+}
+void CreateStronTable() {
+	CountTime_Create();
+	lineWithParam("Создание множества");
+	LenSet();
+	lineWithParam("Мощность множества");
+	isSubSetAA();
+	lineWithParam("Подмножество А-А");
+	isSubSetBA();
+	lineWithParam("Подмножество В-А");
+	isEqualAA();
+	lineWithParam("Равенство А=А");
+	isEqualBA();
+	lineWithParam("Равенство B=А");
+	MergeAB();
+	lineWithParam("Объединение A и B");
+	InterAB();
+	lineWithParam("Пересечение A и B");
+	DiffAB();
+	lineWithParam("Разность A-B");
+	DiffBA();
+	lineWithParam("Разность B-A");
+	SimmDifAB();
+	lineWithParam("Симметричная разность");
 }
 
-
-
+void createTable() {
+	cout << "Введите размер множества A: ";
+	Size_SetA = WriteLenSet();
+	cout << "Введите размер множества B: ";
+	Size_SetB = WriteLenSet();
+	cout << title;
+	CreateStronTable();
+	cout << horizontLine;
+}
 int main() {
 	setlocale(LC_ALL, "ru");
 	SetConsoleTitle(L"Осин Сергей 23ВП2");
-	/*Lab5();*/
 	createTable();
 	system("pause");
 	return 0;
 }
 
-void Lab5() {
-	cout << "Лабораторная работа 5.\nОсин Сергей. 23ВП2. Вариант-21. Множество A - нечётные цифры, Множество B - числа кратные 3.\n";
-	srand(time(NULL));
-	int sizeA = rand() % (max_size - min_size + 1) + min_size;
-	int sizeB = rand() % (max_size - min_size + 1) + min_size;
-	cout << "Множество A: ";
-	Setset* setsetA = new Setset();
-	setsetA = setsetA->createnewSet('A', sizeA, min_elem, max_elem);
-	cout << setsetA->printSet(',') + '\n';
-	cout << "Мощность A: " << setsetA->LengthSet() << nl;
-	cout << "Множество B: ";
-	Setset* setsetB = new Setset();
-	setsetB = setsetB->createnewSet('B', sizeB, min_elem, max_elem);
-	cout << setsetB->printSet(',') + nl;
-	cout << "Мощность B: " << setsetB->LengthSet() << nl;
-	string state = setsetA->isSubset(setsetB) ? "Да" : "Нет";
-	cout << "Множество A подмножество B? " + state + nl;
-	state = setsetA->isSubset(setsetA) ? "Да" : "Нет";
-	cout << "Множество А подмножество В? " + state + nl;
-	state = setsetA->isEqual(setsetB) ? "Да" : "Нет";
-	cout << "Множество А равно B? " + state + nl;
-	state = setsetA->isEqual(setsetA) ? "Да" : "Нет";
-	cout << "Множеество А равно A? " + state + nl;
-	Setset* setsetC = new Setset();
-	setsetC = setsetA->merge(setsetB);
-	cout << "Объединение А и В: " << setsetC->printSet(',') + nl;
-	cout << "Мощность C: " << setsetC->LengthSet() << nl;
-	setsetC = setsetA->Intersection(setsetB);
-	cout << "Пересечение А и В: " << setsetC->printSet(',') + nl;
-	cout << "Мощность С: " << setsetC->LengthSet() << nl;
-	setsetC = setsetA->Difference(setsetB);
-	cout << "Разность А и В: " << setsetC->printSet(',') + nl;
-	cout << "Мощность С: " << setsetC->LengthSet() << nl;
-	setsetC = setsetB->Difference(setsetA);
-	cout << "Разность В и А: " << setsetC->printSet(',') + nl;
-	cout << "Мощность C: " << setsetC->LengthSet() << nl;
-	setsetC = setsetA->SimmetricDif(setsetB);
-	cout << "Симметричная разность A и B: " << setsetC->printSet(',') + nl;
-	cout << "Мощность С: " << setsetC->LengthSet() << nl;
-	cout << "Очистка множеств A и B: " << nl;
-	setsetA->clearSet();
-	setsetB->clearSet();
-	cout << "Множество А: " << setsetA->printSet(',') + nl;
-	cout << "Мощность А: " << setsetA->LengthSet() << nl;
-	cout << "Множество B: " << setsetB->printSet(',') + nl;
-	cout << "Мощность B: " << setsetB->LengthSet() << nl;
-}
+//void addTitle() {
+//	//	
+//	//	cout << title;
+//	//}
+//	}

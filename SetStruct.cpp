@@ -32,19 +32,17 @@ SetStruct* addnewElement(SetStruct* head, int new_element) {
 }
 
 //F5. Создание множества
-SetStruct* createnewSet(char A, int size, int min_element, int max_element) {
+SetStruct* createnewSet(int size, int min_element, int max_element) {
 	if (size <= 0 || min_element >= max_element)
 		return nullptr;
 	SetStruct* newSet = createEmptySet();
 	int count_elem = 0;
 	while (count_elem < size) {
 		int random_element = rand() % (max_element - min_element + 1) + min_element;
-		if (A == 'A' && random_element % 2 == 0)
-			random_element++;
-		else if (random_element % 3 != 0)
-			random_element += 3 - random_element % 3;
+		SetStruct* set1 = newSet;
 		newSet = addnewElement(newSet, random_element);
-		count_elem++;
+		if (newSet!=set1)
+			count_elem++;
 	}
 	return newSet;
 }

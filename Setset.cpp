@@ -26,19 +26,13 @@ bool Setset::addnewElement(int new_element) {
 }
 
 //F5. Создание множества
-Setset* Setset::createnewSet(char A, int size, int min_element, int max_element) {
+Setset* Setset::createnewSet(int size, int min_element, int max_element) {
 	if (size <= 0 || min_element >= max_element)
 		return nullptr;
 	Setset* SetSet = new Setset();
 	int count_elem = 0;
 	while (count_elem < size) {
 		int random_element = rand() % (max_element + 1 - min_element) + min_element;
-		if (A == 'A') {
-			if (random_element % 2 == 0)
-				random_element++;
-		}
-		else if (random_element % 3 != 0)
-			random_element += 3 - random_element % 3;
 		if (SetSet->addnewElement(random_element))
 			count_elem++;
 	}

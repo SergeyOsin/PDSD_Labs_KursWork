@@ -10,7 +10,7 @@ public:
 	bool isEmptySet();
 	bool isElementinSet(int element);
 	bool addnewElement(int new_element);
-	Setset* createnewSet(char A, int size, int min_element, int max_element);
+	Setset* createnewSet(int size, int min_element, int max_element);
 	int LengthSet();
 	std::string printSet(char delimiter);
 	void clearSet();
