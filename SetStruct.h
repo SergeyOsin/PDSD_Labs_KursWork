@@ -9,7 +9,7 @@ SetStruct* createEmptySet();
 bool isEmptySet(SetStruct* headNode);
 bool isElementinSet(SetStruct* headNode, int element);
 SetStruct* addnewElement(SetStruct* head, int new_element);
-SetStruct* createnewSet(char A, int size, int min_element, int max_element);
+SetStruct* createnewSet(int size, int min_element, int max_element);
 int LengthSet(SetStruct* head);
 std::string printSet(SetStruct* head, char delimiter);
 SetStruct* deleteSet(SetStruct* head);

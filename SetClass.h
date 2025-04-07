@@ -15,7 +15,7 @@ public:
 	bool isEmptySet();
 	bool isElementinSet(int element);
 	LinkedList* addnewElement(int new_element);
-	LinkedList* createnewSet(char A, int size, int min_element, int max_element);
+	LinkedList* createnewSet(int size, int min_element, int max_element);
 	int LengthSet();
 	std::string printSet(char delimiter);
 	~SetClass();
