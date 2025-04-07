@@ -41,8 +41,10 @@ SetStruct* createnewSet(int size, int min_element, int max_element) {
 		int random_element = rand() % (max_element - min_element + 1) + min_element;
 		SetStruct* set1 = newSet;
 		set1 = addnewElement(set1, random_element);
-		if (set1==newSet)
+		if (set1 != newSet) {
+			newSet = set1;
 			count_elem++;
+		}
 	}
 	return newSet;
 }

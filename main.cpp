@@ -7,33 +7,58 @@
 #include "Setunorderedset.h"
 #include "Setbitset.h"
 #include <Windows.h>
+#define nl '\n';
 using namespace std;
-const int min_size = 7, max_size = 9;
-const int min_elem = 10, max_elem = 98;
-int SIZE_SET;
-void lineWithParam(string text) {
-	string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
-	while (text.size() < 23) text += " ";
-	string emptyCell1(20, ' ');
-	string emptyCell2(14, ' ');
-	string emptyCell3(12, ' ');
-	string emptyCell4(13, ' ');
-	string emptyCell5(10, ' ');
-	string emptyCell6(15, ' ');
+int Size_SetA;
+int Size_SetB;
+const int MIN_ELEM = 0;
+const int MAX_ELEM_A = 10 * Size_SetA;
+const int MAX_ELEM_B = 10 * Size_SetB;
+const int MIN_LEN = 1000;
+SetStruct* SetStrA;
+SetStruct* SetStrB;
+SetClass* SetClA, SetClB;
+SetList* SetListA, SetListB;
+Setset* SetsetA, SetsetB;
+const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
+const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |";
+double Time[4];
 
-	cout << horizontLine + ' ' + text + '|' + emptyCell1 + '|' + emptyCell2 +
-		'|' + emptyCell3 + '|' + emptyCell4 + '|' + emptyCell5 +
-		'|' + emptyCell6 + '|';
+void CreateSetTime() {
+	clock_t start = clock();
+	SetStrA = createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	clock_t end = clock();
+	double time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[0] = time_createSet;
+	start = clock();
+	SetClA->createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[1] = time_createSet;
+	start = clock();
+	SetListA->createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[2] = time_createSet;
+	start = clock();
+	SetListA->createnewSet(Size_SetA, 0, 10 * Size_SetA);
+	end = clock();
+	time_createSet = (double)(end - start) / CLOCKS_PER_SEC;
+	Time[3] = time_createSet;
 }
 
-void addTitle() {
-	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
-	const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Bitset  | Unordered_set |";
-	cout << title;
+void lineWithParam(string text) {
+	while (text.size() < 23) text += " ";
+	string emptyCell1(18, ' ');
+	string emptyCell2(9, ' ');
+	string emptyCell3(12, ' ');
+	string emptyCell4(13, ' ');
+	cout << horizontLine + ' ' + text + '|' << emptyCell1 << Time[0] << '|' << emptyCell2 << Time[1] << '|' << emptyCell3 << Time[2] << '|' <<
+		emptyCell4 << Time[3] << '|';
 }
 
 void addAllLineWithParam() {
-	addTitle();
+	/*addTitle();*/
 	lineWithParam("Создание множества");
 	lineWithParam("Мощность");
 	lineWithParam("Подмножество А-А");
@@ -45,69 +70,46 @@ void addAllLineWithParam() {
 	lineWithParam("Разность А-В");
 	lineWithParam("Разность В-А");
 	lineWithParam("Симметричная разность");
-	const string horizontLine = "\n---------------------------------------------------------------------------------------------------------------------\n";
 	cout << horizontLine;
 }
 
+int WriteLenSet() {
+	int size1;
+	do {
+		if (!(cin >> size1)) {
+			cout << "Введите целое число!\n";
+			cin.clear();
+			cin.ignore();
+			continue;
+		}
+		if (size1 < MIN_LEN)
+			cout << "Введите размер больше 1000:  ";
+	} while (size1 < MIN_LEN);
+	return size1;
+}
+
 void createTable() {
-	cout << "Введите размер множества: \n";
-	addAllLineWithParam();
+	cout << "Введите размер множества A: ";
+	Size_SetA = WriteLenSet();
+	cout << "Введите размер множества B: ";
+	Size_SetB = WriteLenSet();
+	cout << title;
+	CreateSetTime();
+	lineWithParam("Создание множества");
+	
+	
+	/*addAllLineWithParam();*/
 }
 int main() {
 	setlocale(LC_ALL, "ru");
 	SetConsoleTitle(L"Осин Сергей 23ВП2");
 	createTable();
-	/*cout << "Осин Сергей. 23ВП2. Вариант-21. Множество A - нечётные цифры, Множество B - числа кратные 3.\n";
-	srand(time(NULL));
-	cout << "Множество A: ";
-	int sizeA = rand() % (max_size - min_size + 1) + min_size;
-	int sizeB = rand() % (max_size - min_size + 1) + min_size;
-	cout << "Структура set3:\n";
-	SetStruct* A = createnewSet('A', sizeA, min_elem, max_elem);
-	cout << printSet(A, ',') << '\n';
-	cout << "Мощность множества A: " << LengthSet(A) << '\n';
-	cout << "Класс set3:\n";
-	SetClass* SA = new SetClass();
-	SA->createnewSet('A', sizeA, min_elem, max_elem);
-	cout << "Множество A: ";
-	cout << SA->printSet(',') << '\n';
-	cout << "Мощность А: " << SA->LengthSet() << '\n';
-	cout << "Контейнер list:\n";
-	SetList* setlist = new SetList();
-	setlist=setlist->createnewSet('A', sizeA, min_elem, max_elem);
-	cout << "Множество A: " << setlist->printSet(',');
-	cout << "\nМощность A: " << setlist->LengthSet();
-	cout << "\nМножество B: ";
-	SetList* setlist1 = new SetList();
-	setlist1 = setlist1->createnewSet('B', sizeB, min_elem, max_elem);
-	cout << setlist1->printSet(',');
-	cout << "\nСимметричная разность A и B: ";
-	SetList* C = setlist->SimmetricDif(setlist1);
-	cout << C->printSet(',') << '\n';
-	cout << "Мощность C: " << C->LengthSet();
-	cout << "\nКонтейнер set3:\n";
-	Setset* set1 = new Setset();
-	set1=set1->createnewSet('A', sizeA, min_elem, max_elem);
-	cout << "Множество A: " << set1->printSet(',') << '\n';
-	cout << "Мощность A: " << set1->LengthSet();
-	cout << "\nКонтейнер unorderedset:\n";
-	Setunorderedset* setB = new Setunorderedset();
-	setB = setB->createnewSet('A', sizeA, min_elem, max_elem);
-	cout << "Множество B: " << setB->printSet(',') << '\n';
-	cout << "Мощность B: " << setB->LengthSet() << '\n';
-	cout << "Контейнер bitset:\n";
-	Setbitset* set3 = new Setbitset();
-	set3 = set3->createnewSet('A', 10, 10, 99);
-	cout << "A: " << set3->printSet(',') + '\n';
-	cout << "length A: "<< set3->LengthSet() + '\n';
-	Setbitset* setb = new Setbitset();
-	setb = setb->createnewSet('B', 10, 11, 99);
-	cout << "B: " + setb->printSet(',') + '\n';
-	Setbitset* C1 = new Setbitset();
-	C1= set3->Intersection(setb);
-	cout << "C1: " + C1->printSet(',') + '\n';
-	cout << "Length C1: " << C1->LengthSet() + '\n';*/
 	system("pause");
 	return 0;
-
 }
+
+//void addTitle() {
+//	//	
+//	//	cout << title;
+//	//}
+//	}

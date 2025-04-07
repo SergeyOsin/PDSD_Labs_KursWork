@@ -37,17 +37,20 @@ SetClass::LinkedList* SetClass::addnewElement(int new_element) {
 
 //F5. Создание множества
 SetClass::LinkedList* SetClass::createnewSet(int size, int min_element, int max_element) {
-    list = nullptr;
+    LinkedList* list2 = nullptr;
     if (size <= 0 || min_element >= max_element)
-        return list;
+        return list2;
     int count_elem = 0;
     while (count_elem < size) {
         int random_element = rand() % (max_element + 1 - min_element) + min_element;
-        LinkedList* list1 = list;
+        LinkedList* list1 = list2;
         list = addnewElement(random_element);
-        if (list != list1)
+        if (list2 != list1) {
+            list2 = list1;
             count_elem++;
+        }
     }
+    list = list2;
     return list;
 }
 
