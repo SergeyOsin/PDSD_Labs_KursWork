@@ -26,19 +26,13 @@ bool Setunorderedset::addnewElement(int new_element) {
 }
 
 //F5. Создание множества
-Setunorderedset* Setunorderedset::createnewSet(char A, int size, int min_element, int max_element) {
+Setunorderedset* Setunorderedset::createnewSet(int size, int min_element, int max_element) {
 	Setunorderedset* newset = new Setunorderedset();
 	if (size <= 0 || min_element >= max_element)
 		return newset;
 	int count_elem = 0;
 	while (count_elem < size) {
 		int rand_elem = rand() % (max_element - min_element + 1) + min_element;
-		if (A == 'A') {
-			if (rand_elem % 2 == 0)
-				rand_elem++;
-		}
-		else if (rand_elem % 3 != 0)
-			rand_elem += 3 - rand_elem % 3;
 		if (newset->addnewElement(rand_elem))
 			count_elem++;
 	}
