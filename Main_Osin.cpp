@@ -32,7 +32,7 @@ Setunorderedset* SetunsetB;
 Setbitset* SetbitsetA;
 Setbitset* SetbitsetB;
 const string horizontLine = "\n-----------------------------------------------------------------------------------------------------------------------\n";
-const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |     Bitset   | Unordered_set |";
+const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Unordered_set  |   Bitset   |";
 double Time[6];
 high_resolution_clock::time_point start;
 
@@ -88,6 +88,7 @@ void CountTime_Create() {
     time_createSet = duration_cast<duration<double>>(end - start).count();
     SetbitsetB = new Setbitset();
     SetbitsetB->createnewSet(Size_SetB, 0, Size_SetB * 10);
+    Time[5] = time_createSet;
 }
 
 void LenSet() {
@@ -282,29 +283,6 @@ void isEqualBA() {
     end = high_resolution_clock::now();
     time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[5] = time_createSet;
-}
-
-void lineWithParam(string text) {
-    while (text.size() < 23) text += " ";
-    cout << horizontLine + ' ' + text + '|';
-    string text1 = to_string(Time[0]);
-    while (text1.size() < 20) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[1]);
-    while (text1.size() < 14) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[2]);
-    while (text1.size() < 12) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[3]);
-    while (text1.size() < 13) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[4]);
-    while (text1.size() < 14) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[5]);
-    while (text1.size() < 15) text1 += " ";
-    cout << text1 + '|';
 }
 
 void MergeAB() {
@@ -515,6 +493,29 @@ void SimmDifAB() {
     C5 = SetbitsetA->SimmetricDif(SetbitsetB);
     end = high_resolution_clock::now();
     Time[5] = duration_cast<duration<double>>(end - start).count();
+}
+
+void lineWithParam(string text) {
+    while (text.size() < 23) text += " ";
+    cout << horizontLine + ' ' + text + '|';
+    string text1 = to_string(Time[0]);
+    while (text1.size() < 20) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[1]);
+    while (text1.size() < 14) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[2]);
+    while (text1.size() < 12) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[3]);
+    while (text1.size() < 13) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[4]);
+    while (text1.size() < 17) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[5]);
+    while (text1.size() < 12) text1 += " ";
+    cout << text1 + '|';
 }
 
 int WriteLenSet() {
