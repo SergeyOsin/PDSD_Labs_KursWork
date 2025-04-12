@@ -8,6 +8,7 @@
 #include "Setunorderedset.h"
 #include "Setbitset.h"
 #include <Windows.h>
+#include <typeinfo>
 #define nl '\n';
 #define ver cout << '|';
 using namespace std;
@@ -35,11 +36,12 @@ const string horizontLine = "\n-------------------------------------------------
 const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Unordered_set  |   Bitset   |";
 double Time[6];
 high_resolution_clock::time_point start;
+high_resolution_clock::time_point end;
 
 void CountTime_Create() {
     start = high_resolution_clock::now();
     SetStrA = createnewSet(Size_SetA, 0, 10 * Size_SetA);
-    auto end = high_resolution_clock::now();
+    high_resolution_clock::time_point end = high_resolution_clock::now();
     SetStrB = createnewSet(Size_SetB, 0, 10 * Size_SetB);
     double time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[0] = time_createSet;
@@ -202,7 +204,7 @@ void isSubSetBA() {
     Time[4] = time_createSet;
 
     start = high_resolution_clock::now();
-    flag = SetbitsetB->isSubset(SetbitsetB);
+    flag = SetbitsetB->isSubset(SetbitsetA);
     end = high_resolution_clock::now();
     time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[5] = time_createSet;
@@ -210,7 +212,7 @@ void isSubSetBA() {
 
 void isEqualAA() {
     start = high_resolution_clock::now();
-    bool flag = isEqual(SetStrA, SetStrB);
+    bool flag = isEqual(SetStrA, SetStrA);
     auto end = high_resolution_clock::now();
     double time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[0] = time_createSet;
@@ -520,16 +522,17 @@ void lineWithParam(string text) {
 
 int WriteLenSet() {
     int size1;
-    do {
-        if (!(cin >> size1)) {
-            cout << "Введите целое число!\n";
-            cin.clear();
-            cin.ignore();
-            continue;
-        }
-        if (size1 < MIN_LEN)
-            cout << "Введите размер больше 1000:  ";
-    } while (size1 < MIN_LEN);
+    cin >> size1;
+    while (size1<0 || cin.fail()) {
+        if (cin.fail())
+            cout << "Введите целое число! ";
+        else if (size1<0)
+            cout << "Введите положительное число! ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Повторите ввод: ";
+        cin >> size1;
+    }
     return size1;
 }
 
