@@ -8,6 +8,7 @@
 #include "Setunorderedset.h"
 #include "Setbitset.h"
 #include <Windows.h>
+#include <typeinfo>
 #define nl '\n';
 #define ver cout << '|';
 using namespace std;
@@ -32,14 +33,15 @@ Setunorderedset* SetunsetB;
 Setbitset* SetbitsetA;
 Setbitset* SetbitsetB;
 const string horizontLine = "\n-----------------------------------------------------------------------------------------------------------------------\n";
-const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |     Bitset   | Unordered_set |";
+const string title = horizontLine + "\t\t\t| Односвязный список | Класс список |    List    |     Set     |  Unordered_set  |   Bitset   |";
 double Time[6];
 high_resolution_clock::time_point start;
+high_resolution_clock::time_point end;
 
 void CountTime_Create() {
     start = high_resolution_clock::now();
     SetStrA = createnewSet(Size_SetA, 0, 10 * Size_SetA);
-    auto end = high_resolution_clock::now();
+    high_resolution_clock::time_point end = high_resolution_clock::now();
     SetStrB = createnewSet(Size_SetB, 0, 10 * Size_SetB);
     double time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[0] = time_createSet;
@@ -88,11 +90,13 @@ void CountTime_Create() {
     time_createSet = duration_cast<duration<double>>(end - start).count();
     SetbitsetB = new Setbitset();
     SetbitsetB->createnewSet(Size_SetB, 0, Size_SetB * 10);
+    Time[5] = time_createSet;
 }
 
 void LenSet() {
+    int len;
     start = high_resolution_clock::now();
-    int len = LengthSet(SetStrA);
+    len = LengthSet(SetStrA);
     auto end = high_resolution_clock::now();
     double time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[0] = time_createSet;
@@ -129,7 +133,6 @@ void LenSet() {
 }
 
 void isSubSetAA() {
-    SetStruct* C = new SetStruct();
     start = high_resolution_clock::now();
     bool flag = isSubset(SetStrA, SetStrA);
     auto end = high_resolution_clock::now();
@@ -143,13 +146,11 @@ void isSubSetAA() {
     Time[1] = time_createSet;
 
     start = high_resolution_clock::now();
-    SetListA = new SetList();
     flag = SetListA->isSubset(SetListA);
     end = high_resolution_clock::now();
     time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[2] = time_createSet;
 
-    SetsetA = new Setset();
     start = high_resolution_clock::now();
     flag = SetsetA->isSubset(SetsetA);
     end = high_resolution_clock::now();
@@ -201,7 +202,7 @@ void isSubSetBA() {
     Time[4] = time_createSet;
 
     start = high_resolution_clock::now();
-    flag = SetbitsetB->isSubset(SetbitsetB);
+    flag = SetbitsetB->isSubset(SetbitsetA);
     end = high_resolution_clock::now();
     time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[5] = time_createSet;
@@ -209,7 +210,7 @@ void isSubSetBA() {
 
 void isEqualAA() {
     start = high_resolution_clock::now();
-    bool flag = isEqual(SetStrA, SetStrB);
+    bool flag = isEqual(SetStrA, SetStrA);
     auto end = high_resolution_clock::now();
     double time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[0] = time_createSet;
@@ -282,29 +283,6 @@ void isEqualBA() {
     end = high_resolution_clock::now();
     time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[5] = time_createSet;
-}
-
-void lineWithParam(string text) {
-    while (text.size() < 23) text += " ";
-    cout << horizontLine + ' ' + text + '|';
-    string text1 = to_string(Time[0]);
-    while (text1.size() < 20) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[1]);
-    while (text1.size() < 14) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[2]);
-    while (text1.size() < 12) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[3]);
-    while (text1.size() < 13) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[4]);
-    while (text1.size() < 14) text1 += " ";
-    cout << text1 + '|';
-    text1 = to_string(Time[5]);
-    while (text1.size() < 15) text1 += " ";
-    cout << text1 + '|';
 }
 
 void MergeAB() {
@@ -517,28 +495,52 @@ void SimmDifAB() {
     Time[5] = duration_cast<duration<double>>(end - start).count();
 }
 
+void lineWithParam(string text) {
+    while (text.size() < 23) text += " ";
+    cout << horizontLine + ' ' + text + '|';
+    string text1 = to_string(Time[0]);
+    while (text1.size() < 20) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[1]);
+    while (text1.size() < 14) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[2]);
+    while (text1.size() < 12) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[3]);
+    while (text1.size() < 13) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[4]);
+    while (text1.size() < 17) text1 += " ";
+    cout << text1 + '|';
+    text1 = to_string(Time[5]);
+    while (text1.size() < 12) text1 += " ";
+    cout << text1 + '|';
+}
+
 int WriteLenSet() {
     int size1;
-    do {
-        if (!(cin >> size1)) {
-            cout << "Введите целое число!\n";
-            cin.clear();
-            cin.ignore();
-            continue;
-        }
-        if (size1 < MIN_LEN)
-            cout << "Введите размер больше 1000:  ";
-    } while (size1 < MIN_LEN);
+    cin >> size1;
+    while (size1<0 || cin.fail()) {
+        if (cin.fail())
+            cout << "Введите целое число! ";
+        else if (size1<0)
+            cout << "Введите положительное число! ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Повторите ввод: ";
+        cin >> size1;
+    }
     return size1;
 }
 
 void CreateStronTable() {
     CountTime_Create();
     lineWithParam("Создание множества");
-    LenSet();
-    lineWithParam("Мощность множества");
-    isSubSetAA();
-    lineWithParam("Подмножество А-А");
+    /*LenSet();
+    lineWithParam("Мощность множества");*/
+   /* isSubSetAA();
+    lineWithParam("Подмножество А-А");*/
     isSubSetBA();
     lineWithParam("Подмножество В-А");
     isEqualAA();

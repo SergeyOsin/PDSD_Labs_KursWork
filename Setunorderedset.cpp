@@ -18,11 +18,7 @@ bool Setunorderedset::isElementinSet(int element) {
 
 //F4. Добавление нового элемента в множество
 bool Setunorderedset::addnewElement(int new_element) {
-	if (!isElementinSet(new_element)) {
-		set1.insert(new_element);
-		return true;
-	}
-	return false;
+	return set1.insert(new_element).second;
 }
 
 //F5. Создание множества
