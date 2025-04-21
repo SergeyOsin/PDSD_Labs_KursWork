@@ -94,8 +94,9 @@ void CountTime_Create() {
 }
 
 void LenSet() {
+    int len;
     start = high_resolution_clock::now();
-    int len = LengthSet(SetStrA);
+    len = LengthSet(SetStrA);
     auto end = high_resolution_clock::now();
     double time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[0] = time_createSet;
@@ -132,7 +133,6 @@ void LenSet() {
 }
 
 void isSubSetAA() {
-    SetStruct* C = new SetStruct();
     start = high_resolution_clock::now();
     bool flag = isSubset(SetStrA, SetStrA);
     auto end = high_resolution_clock::now();
@@ -146,13 +146,11 @@ void isSubSetAA() {
     Time[1] = time_createSet;
 
     start = high_resolution_clock::now();
-    SetListA = new SetList();
     flag = SetListA->isSubset(SetListA);
     end = high_resolution_clock::now();
     time_createSet = duration_cast<duration<double>>(end - start).count();
     Time[2] = time_createSet;
 
-    SetsetA = new Setset();
     start = high_resolution_clock::now();
     flag = SetsetA->isSubset(SetsetA);
     end = high_resolution_clock::now();
@@ -539,10 +537,10 @@ int WriteLenSet() {
 void CreateStronTable() {
     CountTime_Create();
     lineWithParam("Создание множества");
-    LenSet();
-    lineWithParam("Мощность множества");
-    isSubSetAA();
-    lineWithParam("Подмножество А-А");
+    /*LenSet();
+    lineWithParam("Мощность множества");*/
+   /* isSubSetAA();
+    lineWithParam("Подмножество А-А");*/
     isSubSetBA();
     lineWithParam("Подмножество В-А");
     isEqualAA();
