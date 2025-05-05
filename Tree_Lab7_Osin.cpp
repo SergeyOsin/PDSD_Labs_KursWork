@@ -139,5 +139,23 @@ string BinarySearchTree::AvoidButtomtoTop() {
 }
 
 void BinarySearchTree::DeleteTree() {
+    BST* current = bst;
+    while (current != nullptr) {
+        if (current->left != nullptr) {
+            BST* predecessor = current->left;
+            while (predecessor->right != nullptr) {
+                predecessor = predecessor->right;
+            }
+            predecessor->right = current->right;
+            BST* temp = current;
+            current = current->left;
+            delete temp;
+        }
+        else {
+            BST* temp = current;
+            current = current->right;
+            delete temp;
+        }
+    }
     bst = nullptr;
 }

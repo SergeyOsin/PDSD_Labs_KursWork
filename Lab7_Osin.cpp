@@ -25,7 +25,10 @@ int main() {
     string str = (bst->IsEmptyTree()) ? "Да" : "Нет";
     cout << str << '\n';
     cout << "Создали дерево: \n";
-    bst->createTree(10,150,20);
+    bst->createTree(10,100,10);
+    cout << "Обход сверху вниз: " << bst->AvoidfromToptoButtom() << '\n';
+    cout << "Вставка элемента 58 в дерево: \n";
+    bst->InsertNewData(58);
     cout << "Обход сверху вниз: " << bst->AvoidfromToptoButtom() << '\n';
     cout << "Обход слева направо: " << bst->AvoidLeftToRight() << '\n';
     cout << "Обход снизу вверх: " << bst->AvoidButtomtoTop() << '\n';
