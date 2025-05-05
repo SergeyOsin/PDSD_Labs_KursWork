@@ -33,12 +33,12 @@
     <ClInclude Include="Setunorderedset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BinarySearchTree.h">
+    <ClInclude Include="Tree_Lab7_Osin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main_Osin.cpp">
+    <ClCompile Include="Lab7_Osin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetClass.cpp">
@@ -53,7 +53,7 @@
     <ClCompile Include="Setbitset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BinarySearchTree.cpp">
+    <ClCompile Include="Tree_Lab7_Osin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SetStruct.cpp">
