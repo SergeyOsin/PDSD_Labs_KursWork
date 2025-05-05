@@ -17,6 +17,7 @@ using std::vector;
 using namespace std::chrono;
 
 int main() {
+    srand(time(NULL));
     setlocale(LC_ALL, "ru");
     SetConsoleTitle(L"Осин Сергей 23ВП2");
     cout << "Создание пустого дерева\n";
